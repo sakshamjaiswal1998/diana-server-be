@@ -22,14 +22,14 @@ const app = express();
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './public/products')
+      cb(null, './public/static/products')
     },
     filename: function (req, file, cb) {
       cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9)+(file.mimetype == 'image/png' ? '.png' : '.jpg'))
     }
 })
 var upload = multer({ storage: storage })
-// var upload = multer({ dest: 'public/products' })
+// var upload = multer({ dest: 'public/static/products' })
 
 app.use(express.static(__dirname + '/public'));
 app.use('/uploads', express.static('uploads'));
@@ -50,16 +50,6 @@ app.use(bodyParser.urlencoded({
 // app.use(bodyParser.json())
 
 
-// Product - Create
-app.post('/products', 
-    upload.fields([ {name: 'image', maxCount: 1,}, { name: 'galleryimages', maxCount: 10, }]), 
-    createProduct);
-// Product - Update
-app.put('/products/:id', 
-    upload.fields([ {name: 'image', maxCount: 1,}, { name: 'galleryimages', maxCount: 10, }]), 
-    updateProductById);
-// Products - General
-app.use('/products', ProductRoutes);
 
 // Gallery
 app.get('/art', getArtProducts);
@@ -72,6 +62,16 @@ app.use('/posts', PostRoutes);
 app.use('/events', EventRoutes);
 
 
-const PORT = process.env.PORT || 5000;
+// Product - Create
+app.post('/products', 
+    upload.fields([ {name: 'image', maxCount: 1,}, { name: 'galleryimages', maxCount: 10, }]), 
+    createProduct);
+// Product - Update
+app.put('/products/:id', 
+    upload.fields([ {name: 'image', maxCount: 1,}, { name: 'galleryimages', maxCount: 10, }]), 
+    updateProductById);
+// Products - General
+app.use('/products', ProductRoutes);
+const PORT = process.env.PORT || 5001;
 
 app.listen(PORT, () => console.log(`Server running on Port ${PORT}`))

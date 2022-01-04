@@ -50,6 +50,7 @@ const ProductSchema = new mongoose.Schema({
         required: true,
     },
     galleryimages: [{
+        _id: String,
         path: String
     }]
 });
