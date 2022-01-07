@@ -1,6 +1,6 @@
 const products = [
     {
-      productId: '61ce4a2f06f60968aedbce0f',
+      productId: '61d8709a94518637d9d3c91c',
       name: "The Purple Flame",
       image:
         "1640910177892-183715851.jpg",
@@ -12,12 +12,12 @@ const products = [
       paint: 'Acrylic',
       medium: 'Paper',
       framed: 'Framed',
-      width: 12,
-      height: 6,
+      width: 34,
+      height: 12,
       unit: 'inch'
     },
     {
-      productId: '61ce4ec859e667a854e39b2a',
+      productId: '61d8709a94518637d9d3c921',
       name: "Bricks of Colour",
       image:
         "1640910536287-656882873.jpg",
@@ -34,7 +34,7 @@ const products = [
       unit: 'cm'
     },
     {
-      productId: '61ce4b03ccfae1ffe17c0aee',
+      productId: '61d8709a94518637d9d3c91e',
       name: "Busy Life",
       image:
         "1640909571001-432301980.jpg",
