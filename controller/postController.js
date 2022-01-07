@@ -50,7 +50,7 @@ const updatePostById = async(req, res) => {
     try {
         // console.log('REQ', req.params, req.body);
         let model = await Post.findOneAndUpdate({_id: req.params.id}, {$set: {
-            name: req.body.name,
+            title: req.body.title,
             body: req.body.body,
             category: req.body.category,
         }});
