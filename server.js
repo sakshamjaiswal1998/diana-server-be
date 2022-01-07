@@ -28,8 +28,6 @@ const app = express();
 
 require("./config/db")(app);
 
-app.use(express.limit('4M'));
-
 var storageProduct = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, process.cwd()+'/backend/public/products')
@@ -74,9 +72,12 @@ app.use(morgan('dev'));
 app.use(cors());
 
 // configure the app to use bodyParser()
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.use(bodyParser.json({limit: '10mb'}));
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+limit: '10mb',
+extended: true
+})); 
+
 // app.use(bodyParser.json())
 
 
