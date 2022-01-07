@@ -1,7 +1,19 @@
 const mongoose = require('mongoose');
 
-const ProductSchema = new mongoose.Schema({
+const FeaturedSchema = new mongoose.Schema({
+    productId: {
+        type: String,
+        required: true,
+    },
     name: {
+        type: String,
+        required: true,
+    },
+    image: {
+        type: String,
+        required: true,
+    },
+    position: {
         type: String,
         required: true,
     },
@@ -9,22 +21,10 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    category: {
-        type: String,
-        required: true,
-    },
-    price: {
-        type: Number,
-        required: true,
-    },
-    stock: {
-        type: Number,
-        required: true,
-    },
-    image: {
-        type: String,
-        required: false,
-    },
+    // price: {
+    //     type: Number,
+    //     required: true,
+    // },
     paint: {
         type: String,
         required: true,
@@ -49,16 +49,7 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    galleryimages: [
-        {
-            type: {
-                _id: String,
-                path: String
-            },
-            required: false,
-        }
-    ]
 });
 
-const Product = mongoose.model('product', ProductSchema);
-module.exports = Product
+const Featured = mongoose.model('featured', FeaturedSchema);
+module.exports = Featured

@@ -25,23 +25,23 @@ const getPostById = async(req, res) => {
 const createPost = async(req, res) => {
     // console.log(req.file, req.body, req.files, 'FILE/BODY/FILES')
     let temp = req.body;
-    // if(req.files.image) {
-    //     console.log('files.img', req.files.image)
-    //     temp.image = req.files.image[0].filename;
-    // }
-    // if(req.files.galleryimages) {
-    //     temp.galleryimages = [];
-    //     req.files.galleryimages.map(async (rFile) => {
-    //             await temp.galleryimages.push({path: rFile.filename});
-    //     });
-    // }
-    // try {
-    //     const newPost = await Post.create(temp);
-    //     res.json(newPost);
-    // } catch (error) {
-    //     console.log('ERR: createPost', error);
-    //     res.status(500).json({message: "Server error"})
-    // }
+    if(req.files.image) {
+        console.log('files.img', req.files.image)
+        temp.image = req.files.image[0].filename;
+    }
+    if(req.files.galleryimages) {
+        temp.galleryimages = [];
+        req.files.galleryimages.map(async (rFile) => {
+                await temp.galleryimages.push({path: rFile.filename});
+        });
+    }
+    try {
+        const newPost = await Post.create(temp);
+        res.json(newPost);
+    } catch (error) {
+        console.log('ERR: createPost', error);
+        res.status(500).json({message: "Server error"})
+    }
 };
 
 const updatePostById = async(req, res) => {
@@ -51,17 +51,8 @@ const updatePostById = async(req, res) => {
         // console.log('REQ', req.params, req.body);
         let model = await Post.findOneAndUpdate({_id: req.params.id}, {$set: {
             name: req.body.name,
-            description: req.body.description,
+            body: req.body.body,
             category: req.body.category,
-            price: req.body.price,
-            stock: req.body.stock,
-            paint: req.body.paint,
-            medium: req.body.medium,
-            framed: req.body.framed,
-            width: req.body.width,
-            height: req.body.height,
-            unit: req.body.unit,
-            // image: req.body.image,
         }});
         if(req.files.image) {
             await Post.findOneAndUpdate({_id: req.params.id}, {$set: {

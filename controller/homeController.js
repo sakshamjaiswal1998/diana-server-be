@@ -1,8 +1,20 @@
 const Event = require('../models/Event');
-const multer  = require('multer')
+const multer  = require('multer');
+const Featured = require('../models/Featured');
 const upload = multer({ dest: 'uploads/' })
 
-const getAllEvents = async(req, res) => {
+
+const getHome = async(req, res) => {
+    try {
+        const featureds = await Featured.find({});
+        res.json(featureds);
+    } catch (error) {
+        console.log('ERR: getHome', error);
+        res.status(500).json({message: "Server error"})
+    }
+};
+
+const getFeatured = async(req, res) => {
     try {
         const events = await Event.find({});
         res.json(events);
@@ -12,7 +24,7 @@ const getAllEvents = async(req, res) => {
     }
 };
 
-const getEventById = async(req, res) => {
+const postFeatured = async(req, res) => {
     try {
         const event = await Event.findById(req.params.id);
         res.json(event);
@@ -102,9 +114,5 @@ const removeEvent = async(req, res) => {
 };
 
 module.exports = {
-    getAllEvents,
-    getEventById,
-    createEvent,
-    updateEventById,
-    removeEvent
+    getHome,
 }

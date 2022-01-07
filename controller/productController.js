@@ -3,9 +3,11 @@ const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
 
 const getAllProducts = async(req, res) => {
+    console.log('Get PRODucts');
     try {
         const products = await Product.find({});
         // productsRes = await products.map(async(item, index)=>({slno: index+1, ...item}));
+        console.log('retrieved', products);
         res.json(products);
     } catch (error) {
         console.log('ERR: getAllProducts', error);

@@ -2,13 +2,16 @@ const express = require('express');
 const router = express.Router();
 
 const { 
-    getUpcomingEvents,
-    getPastEvents } = require('../controller/eventController');
+    getAllEvents,
+    getEventById,
+    removeEvent } = require('../controller/eventController');
 
 //@desc Get all products from DB
 //@route GET /api/products
 //@access Public
-router.get('/upcoming', getUpcomingEvents);
-router.get('/past', getPastEvents);
+router.get('/index', getAllEvents);
+router.get('/:id', getEventById);
+// router.put('/:id', updateEventById);
+router.delete('/:id', removeEvent);
 
 module.exports = router;
