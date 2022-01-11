@@ -18,7 +18,36 @@ const getAllProducts = async(req, res) => {
 const getProductById = async(req, res) => {
     try {
         const product = await Product.findById(req.params.id);
-        res.json(product);
+        // const related = await Product.find(req.params.id);
+
+        const max = await Product.count();
+        console.log('*max', max);
+        var random1 = Math.floor(Math.random() * max)+1
+        var random2 = Math.floor(Math.random() * max)+1
+        var random3 = Math.floor(Math.random() * max)+1
+        // console.log('*random', random1, random2, random3);
+        let ids = [random1, random2, random3];
+        let related = await Product.find({id: {
+            $in: ids
+        }}).limit(3)
+        // console.log('*related', related.length);
+
+        // Get the count of all users
+        // Product.count().exec(function (err, count) {
+
+        //     // Get a random entry
+        //     var random = Math.floor(Math.random() * count)
+        
+        //     // Again query all users but only fetch one offset by our random #
+        //     Product.findOne().skip(random).exec(
+        //     function (err, result) {
+        //         // Tada! random user
+        //         console.log(result) 
+        //     })
+        // })
+
+
+        res.json({product: product, related: related});
     } catch (error) {
         console.log('ERR: getProductById', error);
         res.status(500).json({message: "Server error"})
