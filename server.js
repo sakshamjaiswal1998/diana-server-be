@@ -19,7 +19,7 @@ const { createProduct, updateProductById } = require('./controller/productContro
 const { createPost, updatePostById } = require('./controller/postController');
 const { createEvent, updateEventById } = require('./controller/eventController');
 
-const { getArtProducts, getExclusiveProducts, getSoldoutProducts } = require('./controller/GalleryController');
+const { getArtProducts, getExclusiveProducts, getSoldoutProducts, getProduct } = require('./controller/GalleryController');
 
 
 // connectDB();
@@ -115,6 +115,8 @@ app.put('/posts/:id',
     updatePostById);
 // Posts - General
 app.use('/posts', PostRoutes);
+
+app.get('/artwork/:id', getProduct);
 
 
 // Event - Create
