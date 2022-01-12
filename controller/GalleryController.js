@@ -3,7 +3,9 @@ const Product = require('../models/Product');
 const getArtProducts = async(req, res) => {
     console.log('ART/');
     try {
-        const products = await Product.find({category: 'art'});
+        const products = await Product.find({category: 'art', stock: {
+            $gt: 0
+        }});
         // productsRes = await products.map(async(item, index)=>({slno: index+1, ...item}));
         res.json(products);
     } catch (error) {
