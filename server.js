@@ -9,57 +9,31 @@ const morgan = require('morgan');
 var util= require('util');
 var encoder = new util.TextEncoder('utf-8');
 
+const AuthRoutes = require('./routes/auth.routes')
+const OrderRoutes = require('./routes/order.routes')
+const AuthUserRoutes = require('./routes/user.routes')
 const ProductRoutes = require('./routes/ProductRoutes')
 const PostRoutes = require('./routes/PostRoutes')
 const EventRoutes = require('./routes/EventRoutes')
+const UserRoutes = require('./routes/UserRoutes')
 const EventPageRoutes = require('./routes/EventPageRoutes')
 const homeRoutes = require('./routes/homeRoutes')
 
 const { createProduct, updateProductById } = require('./controller/productController');
 const { createPost, updatePostById } = require('./controller/postController');
 const { createEvent, updateEventById } = require('./controller/eventController');
+const { createUser, updateUserById } = require('./controller/userController');
 
 const { getArtProducts, getExclusiveProducts, getSoldoutProducts, getProduct } = require('./controller/GalleryController');
 
 
-// connectDB();
+
+
+// App
 
 const app = express();
 
 require("./config/db")(app);
-
-var storageProduct = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, process.cwd()+'/backend/public/products')
-    },
-    filename: function (req, file, cb) {
-      cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9)+(file.mimetype == 'image/png' ? '.png' : '.jpg'))
-    }
-})
-var uploadProduct = multer({ storage: storageProduct })
-
-var storagePost = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, process.cwd()+'/backend/public/posts')
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9)+(file.mimetype == 'image/png' ? '.png' : '.jpg'))
-  }
-})
-var uploadPost = multer({ storage: storagePost })
-
-var storageEvent = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, process.cwd()+'/backend/public/events')
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9)+(file.mimetype == 'image/png' ? '.png' : '.jpg'))
-  }
-})
-var uploadEvent = multer({ storage: storageEvent })
-
-
-// var upload = multer({ dest: 'public/products' })
 
 app.use(express.static(__dirname + '/public'));
 app.use('/uploads', express.static('uploads'));
@@ -69,13 +43,72 @@ app.use('/uploads', express.static('uploads'));
 // app.use(express.json());
 
 app.use(morgan('dev'));
-app.use(cors());
+
+var corsOptions = {
+  origin: ["http://localhost:3001", "http://localhost:4001", "dianam.art"],
+  optionsSuccessStatus: 200 // For legacy browser support
+};
+app.use(cors(corsOptions));
+
+// app.use(cors());
+
+
+
+
+var storageProduct = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, process.cwd()+'/public/products')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9)+(file.mimetype == 'image/png' ? '.png' : '.jpg'))
+  }
+})
+var uploadProduct = multer({ storage: storageProduct })
+
+var storagePost = multer.diskStorage({
+destination: function (req, file, cb) {
+  cb(null, process.cwd()+'/public/posts')
+},
+filename: function (req, file, cb) {
+  cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9)+(file.mimetype == 'image/png' ? '.png' : '.jpg'))
+}
+})
+var uploadPost = multer({ storage: storagePost })
+
+
+var storageEvent = multer.diskStorage({
+destination: function (req, file, cb) {
+  cb(null, process.cwd()+'/public/events')
+},
+filename: function (req, file, cb) {
+  cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9)+(file.mimetype == 'image/png' ? '.png' : '.jpg'))
+}
+})
+var uploadEvent = multer({ storage: storageEvent })
+
+
+
+var storageUser = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, process.cwd()+'/public/users')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9)+(file.mimetype == 'image/png' ? '.png' : '.jpg'))
+  }
+  })
+  var uploadUser = multer({ storage: storageUser })
+  
+
+
+
+
+
 
 // configure the app to use bodyParser()
 app.use(bodyParser.json({limit: '10mb'}));
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-limit: '10mb',
-extended: true
+  limit: '10mb',
+  extended: true
 })); 
 
 // app.use(bodyParser.json())
@@ -88,7 +121,6 @@ app.get('/exclusive', getExclusiveProducts);
 app.get('/soldout', getSoldoutProducts);
 
 // Blog
-
 app.use('/events', EventPageRoutes);
 app.use('/home', homeRoutes);
 
@@ -129,6 +161,28 @@ app.put('/events/:id',
     updateEventById);
 // Events - General
 app.use('/events', EventRoutes);
+
+
+// User - Create
+app.post('/users', 
+    uploadUser.fields([ {name: 'image', maxCount: 1,}]), 
+    createUser);
+// User - Update
+app.put('/users/:id', 
+    uploadUser.fields([ {name: 'image', maxCount: 1,}]), 
+    updateUserById);
+// Users - General
+app.use('/users', UserRoutes);
+
+
+
+// Auth routes
+app.use('/', AuthRoutes);
+app.use('/', AuthUserRoutes);
+
+app.use('/', OrderRoutes);
+
+
 
 const PORT = process.env.PORT || 5001;
 
