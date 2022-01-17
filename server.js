@@ -57,7 +57,7 @@ app.use(cors(corsOptions));
 
 var storageProduct = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, process.cwd()+'/public/products')
+    cb(null, process.cwd()+'/backend/public/products')
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9)+(file.mimetype == 'image/png' ? '.png' : '.jpg'))
@@ -67,7 +67,7 @@ var uploadProduct = multer({ storage: storageProduct })
 
 var storagePost = multer.diskStorage({
 destination: function (req, file, cb) {
-  cb(null, process.cwd()+'/public/posts')
+  cb(null, process.cwd()+'/backend/public/posts')
 },
 filename: function (req, file, cb) {
   cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9)+(file.mimetype == 'image/png' ? '.png' : '.jpg'))
@@ -78,7 +78,7 @@ var uploadPost = multer({ storage: storagePost })
 
 var storageEvent = multer.diskStorage({
 destination: function (req, file, cb) {
-  cb(null, process.cwd()+'/public/events')
+  cb(null, process.cwd()+'/backend/public/events')
 },
 filename: function (req, file, cb) {
   cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9)+(file.mimetype == 'image/png' ? '.png' : '.jpg'))
@@ -90,7 +90,7 @@ var uploadEvent = multer({ storage: storageEvent })
 
 var storageUser = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, process.cwd()+'/public/users')
+    cb(null, process.cwd()+'/backend/public/users')
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9)+(file.mimetype == 'image/png' ? '.png' : '.jpg'))
