@@ -11,7 +11,6 @@ const {
 //@access Public
 router.get('/index', getAllUsers);
 router.get('/:id', getUserById);
-// router.put('/:id', updateUserById);
 router.delete('/:id', removeUser);
 
 module.exports = router;
