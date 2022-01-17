@@ -10,12 +10,13 @@ var util= require('util');
 var encoder = new util.TextEncoder('utf-8');
 
 const AuthRoutes = require('./routes/auth.routes')
-const OrderRoutes = require('./routes/order.routes')
+const OrderWebRoutes = require('./routes/order.routes')
 const AuthUserRoutes = require('./routes/user.routes')
 const ProductRoutes = require('./routes/ProductRoutes')
 const PostRoutes = require('./routes/PostRoutes')
 const EventRoutes = require('./routes/EventRoutes')
 const UserRoutes = require('./routes/UserRoutes')
+const OrderRoutes = require('./routes/OrderRoutes')
 const EventPageRoutes = require('./routes/EventPageRoutes')
 const homeRoutes = require('./routes/homeRoutes')
 
@@ -176,12 +177,23 @@ app.put('/users/:id',
 app.use('/users', UserRoutes);
 
 
+// // User - Create
+// app.post('/users', 
+//     uploadUser.fields([ {name: 'image', maxCount: 1,}]), 
+//     createUser);
+// // User - Update
+// app.put('/users/:id', 
+//     uploadUser.fields([ {name: 'image', maxCount: 1,}]), 
+//     updateUserById);
+// Users - General
+app.use('/orders', OrderRoutes);
+
 
 // Auth routes
 app.use('/', AuthRoutes);
 app.use('/', AuthUserRoutes);
 
-app.use('/', OrderRoutes);
+app.use('/', OrderWebRoutes);
 
 
 
