@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 const OrderSchema = new mongoose.Schema({
     order_id: String,
     username: String,
-    order_subtotal: String,
-    shipping: String,
-    taxes: String,
-    order_total: String,
+    order_subtotal: Number,
+    shipping: Number,
+    taxes: Number,
+    order_total: Number,
     payment_method: String,
     transaction_id: String,
     cart: String, // Replace with Cart Object _id later
