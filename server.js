@@ -45,7 +45,7 @@ app.use('/uploads', express.static('uploads'));
 app.use(morgan('dev'));
 
 var corsOptions = {
-  origin: ["http://localhost:3001", "http://localhost:4001", "dianam.art"],
+  origin: ["http://localhost:3001", "http://localhost:4001", "http://dianam.art", "http://admin.dianam.art"],
   optionsSuccessStatus: 200 // For legacy browser support
 };
 app.use(cors(corsOptions));
