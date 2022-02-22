@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
-
-
 const { verifySignUp } = require("../middlewares");
 const controller = require("../controller/auth.controller");
 
 // const { 
 //     getUpcomingEvents,
-    // getPastEvents } = require('../controller/eventPagesController');
+// getPastEvents } = require('../controller/eventPagesController');
 
-    
+
 // router.get('/upcoming', getUpcomingEvents);
 // router.get('/past', getPastEvents);
 
