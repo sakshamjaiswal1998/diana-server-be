@@ -1,9 +1,10 @@
 const express = require('express');
-const { createUserEmail } = require("../controller/userEmail")
+const { sendEmail, createUserEmail } = require("../controller/userEmail")
 const router = express.Router();
 
 
-router.post("/sendEmail/:id", createUserEmail);
+router.post("/sendEmail/:id", sendEmail);
+router.post("/createMail/", createUserEmail);
 
 
 // router.post('/profile', requireSignin, (req, res) => {
