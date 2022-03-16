@@ -60,7 +60,7 @@ app.options('*', cors());
 
 var storageProduct = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, process.cwd() + '/backend/public/products')
+    cb(null, process.cwd() + '/public/products')
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9) + (file.mimetype == 'image/png' ? '.png' : '.jpg'))
