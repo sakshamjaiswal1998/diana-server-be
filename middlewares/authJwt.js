@@ -6,7 +6,7 @@ const Role = require("../models/Role");
 verifyToken = (req, res, next) => {
   let token = req.headers["x-access-token"];
 
-//   console.log('TOK',token)
+  //   console.log('TOK',token)
 
   if (!token) {
     return res.status(403).send({ message: "Access denied!" });
@@ -39,7 +39,7 @@ isAdmin = (req, res, next) => {
         }
 
         for (let i = 0; i < roles.length; i++) {
-          if (roles[i].name === "admin") {
+          if (roles[i].name === "admin" || roles[i].name === "superAdmin") {
             next();
             return;
           }
@@ -86,6 +86,6 @@ isAdmin = (req, res, next) => {
 const authJwt = {
   verifyToken,
   isAdmin,
-//   isModerator
+  //   isModerator
 };
 module.exports = authJwt;

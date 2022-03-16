@@ -1,4 +1,4 @@
-const ROLES = ["user", "admin"];
+const ROLES = ["user", "admin", "superAdmin"];
 
 const Role = require('../models/Role');
 const User = require('../models/User');
@@ -38,19 +38,20 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
 };
 
 checkRolesExisted = (req, res, next) => {
-    if (req.body.roles) {
-        let temp = JSON.parse(req.body.roles);
-        if(temp) {
-            for (let i = 0; i < temp.length; i++) {
-                if (!ROLES.includes(temp[i])) {
-                    res.status(200).json({
-                        message: `Role ${temp[i]} does not exist!`, 
-                        status: 400
-                    });
-                    return;
-                }
-            }
+  if (req.body.roles) {
+    let temp = (req.body.roles);
+    console.log(temp)
+    if (temp) {
+      for (let i = 0; i < temp.length; i++) {
+        if (!ROLES.includes(temp[i])) {
+          res.status(200).json({
+            message: `Role ${temp[i]} does not exist!`,
+            status: 400
+          });
+          return;
         }
+      }
+    }
   }
 
   next();

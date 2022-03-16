@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { verifySignUp } = require("../middlewares");
+const { verifySignUp, authJwt } = require("../middlewares");
 const controller = require("../controller/auth.controller");
 
 // const { 
@@ -22,6 +22,10 @@ router.post(
 );
 
 router.post("/auth/signin", controller.signin);
+
+
+// 
+router.post("/auth/admin/signin", controller.adminSignin);
 
 module.exports = router;
 
