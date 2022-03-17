@@ -60,6 +60,7 @@ app.options('*', cors());
 
 var storageProduct = multer.diskStorage({
   destination: function (req, file, cb) {
+    console.log(process.cwd())
     cb(null, process.cwd() + '/public/products')
   },
   filename: function (req, file, cb) {
