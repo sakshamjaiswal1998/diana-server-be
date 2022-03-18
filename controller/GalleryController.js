@@ -30,8 +30,19 @@ const getExclusiveProducts = async (req, res) => {
 const getSoldoutProducts = async (req, res) => {
     console.log('SOLDOUT/');
     try {
-        const products = await Product.find({ stock: 0 });
-        res.json(products);
+        var products = await Product.find({ stock: 0 });
+        var productsWithCategory = await Product.find({ category: "Sold" });
+        var obj = [...products, ...productsWithCategory]
+        const uniqueArray = obj.filter((value, index) => {
+            const _value = JSON.stringify(value);
+            return index === obj.findIndex(obj => {
+                return JSON.stringify(obj) === _value;
+            });
+        });
+
+        res.status(200).json({
+            uniqueArray
+        })
     } catch (error) {
         console.log('ERR: getAllProducts', error);
         res.status(500).json({ message: "Server error" })
