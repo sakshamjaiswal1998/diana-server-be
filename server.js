@@ -15,6 +15,7 @@ const AuthUserRoutes = require('./routes/user.routes')
 const ProductRoutes = require('./routes/ProductRoutes')
 const PostRoutes = require('./routes/PostRoutes')
 const pressRoutes = require('./routes/pressRoutes')
+const press1Routes = require('./routes/press1Routes')
 const EventRoutes = require('./routes/EventRoutes')
 const UserRoutes = require('./routes/UserRoutes')
 const OrderRoutes = require('./routes/OrderRoutes')
@@ -25,6 +26,7 @@ const userEmail = require("./routes/userEmail")
 const { createProduct, updateProductById } = require('./controller/productController');
 const { createPost, updatePostById } = require('./controller/postController');
 const { createPress, updatePressById } = require('./controller/pressController');
+const { createPress1, updatePress1ById, } = require('./controller/press1Controller');
 const { createEvent, updateEventById } = require('./controller/eventController');
 const { createUser, updateUserById } = require('./controller/userController');
 
@@ -178,6 +180,17 @@ app.put('/events/:id',
   updateEventById);
 // Events - General
 app.use('/events', EventRoutes);
+
+// Event - Create
+app.post('/press1',
+  uploadEvent.fields([{ name: 'image', maxCount: 1, }]),
+  createPress1);
+// Event - Update
+app.put('/press1/:id',
+  uploadEvent.fields([{ name: 'image', maxCount: 1, }]),
+  updatePress1ById);
+// Events - General
+app.use('/press1', press1Routes);
 
 
 // User - Create
