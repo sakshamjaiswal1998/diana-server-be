@@ -31,6 +31,7 @@ const { createEvent, updateEventById } = require('./controller/eventController')
 const { createUser, updateUserById } = require('./controller/userController');
 
 const { getArtProducts, getExclusiveProducts, getSoldoutProducts, getProduct } = require('./controller/GalleryController');
+const { cwd } = require('process');
 
 
 
@@ -73,6 +74,7 @@ var uploadProduct = multer({ storage: storageProduct })
 var storagePost = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, process.cwd() + '/public/posts')
+    console.log(process.cwd())
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9) + (file.mimetype == 'image/png' ? '.png' : '.jpg'))
