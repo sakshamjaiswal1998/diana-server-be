@@ -22,6 +22,7 @@ const OrderRoutes = require('./routes/OrderRoutes')
 const EventPageRoutes = require('./routes/EventPageRoutes')
 const homeRoutes = require('./routes/homeRoutes')
 const userEmail = require("./routes/userEmail")
+const authenticEmail= require('./routes/authenticEmail')
 
 const { createProduct, updateProductById } = require('./controller/productController');
 const { createPost, updatePostById } = require('./controller/postController');
@@ -206,8 +207,8 @@ app.put('/users/:id',
 // Users - General
 app.use('/users', UserRoutes);
 app.use('/userEmail', userEmail);
-
-
+// authenticMail routes
+app.use('/soldEmail',authenticEmail)
 // // User - Create
 // app.post('/users', 
 //     uploadUser.fields([ {name: 'image', maxCount: 1,}]), 
