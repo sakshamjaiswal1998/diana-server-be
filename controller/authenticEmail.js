@@ -9,7 +9,7 @@ var fs = require('fs');
 const handlebars = require('handlebars')
 const pdf = require('html-pdf');
 const { type } = require("os");
-const htmlPdf= require('html-pdf-node')
+
 
 exports.sendEmail = async (req, res) => {
 
