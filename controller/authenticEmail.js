@@ -37,7 +37,7 @@ exports.sendEmail = async (req, res) => {
                 title: req.body.title,
                 year: req.body.year,
                 size: req.body.size,
-                image:`https://api.dianam.art/products/${req.body.image}`
+                image:`http://api.dianam.art/products/${req.body.image}`
             };
            
             const htmlToSend = template(replacements);
@@ -103,7 +103,7 @@ pdf.create(htmlToSend, options).toFile( __dirname +'/templates/certi.pdf', (err,
             //         cid: 'sample' 
             //    },
                {
-                filename: 'test.pdf',
+                filename: 'certificate.pfd',
                 path: __dirname +'/templates/certi.pdf',
                 contentType: 'application/pdf'
                }]
