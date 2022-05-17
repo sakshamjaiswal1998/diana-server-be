@@ -37,7 +37,7 @@ exports.sendEmail = async (req, res) => {
                 title: req.body.title,
                 year: req.body.year,
                 size: req.body.size,
-                headerImage:'http://localhost:5001/certi/sample.png'
+                image:`http://localhost:5001/products/${req.body.image}`
             };
            
             const htmlToSend = template(replacements);
