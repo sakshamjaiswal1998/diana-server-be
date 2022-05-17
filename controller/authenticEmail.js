@@ -37,7 +37,7 @@ exports.sendEmail = async (req, res) => {
                 title: req.body.title,
                 year: req.body.year,
                 size: req.body.size,
-                image:`http://api.dianam.art/products/${req.body.image}`
+                image:`https://api.dianam.art/products/${req.body.image}`
             };
            
             const htmlToSend = template(replacements);
