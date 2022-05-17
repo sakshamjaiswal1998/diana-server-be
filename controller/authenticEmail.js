@@ -103,7 +103,7 @@ pdf.create(htmlToSend, options).toFile( __dirname +'/templates/certi.pdf', (err,
             //         cid: 'sample' 
             //    },
                {
-                filename: 'certificate.pfd',
+                filename: 'certificate.pdf',
                 path: __dirname +'/templates/certi.pdf',
                 contentType: 'application/pdf'
                }]
