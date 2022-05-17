@@ -1,0 +1,191 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            padding: 1rem 3rem;
+        }
+
+        .bod_Con {
+            border: 5px solid black;
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+            flex-direction: column;
+            padding: 1rem;
+        }
+
+        .title {
+            padding: 0.5rem 0 4rem 0;
+            margin: 0 10rem;
+        }
+
+        .bod_Con p :first-child {
+
+
+            text-decoration: underline;
+            font-size: 0.9rem;
+            font-weight: 100;
+            text-align: center;
+            padding: 0 0 0 2.4rem;
+
+        }
+
+        .bod_Con p :nth-child(3) {
+            font-size: 2.3rem;
+            font-weight: 100;
+            text-align: center;
+
+        }
+
+        .bod_Con h1 {
+            text-transform: uppercase;
+            font-size: 1.5rem;
+            margin: 0 .5rem;
+        }
+
+        .bod_Con h5 {
+            font-size: 0.5rem;
+            font-weight: 300;
+            margin: 0 5rem;
+        }
+
+        .row_Con {
+            /* display: flex; */
+            margin: 0 4rem;
+
+        }
+
+        .img_Con {
+            padding: 0.5rem 2rem 0.5rem 1rem;
+        }
+
+        .img_Con img {
+            flex: 1;
+            height: 10rem;
+            position: relative;
+            top: -9rem;
+            left: -4rem;
+        }
+
+        .rowCon div {
+            flex: 1;
+        }
+
+        .details_Con {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            margin: 2rem 0 0 4rem;
+
+        }
+
+        .sig_con {
+            margin: -9rem 2rem 0 2rem;
+        }
+
+        .line {
+            background-color: black;
+            height: 0.2rem;
+            margin: -0.5rem 0 0.5rem 0;
+            width: 75vw;
+            /* margin: 0 5rem */
+        }
+
+        .details_Con h3 {
+            padding: 1rem 1rem;
+
+        }
+
+        .sig_Top img {
+            height: 5rem;
+        }
+
+        .sig_Bottom {
+            padding: 0.8rem;
+        }
+        .footer{
+            margin: 0 2rem;
+        }
+        .footer p{
+            font-size: 0.6rem;
+            margin: 0 2rem;
+        }
+        .footer h3{
+            font-size: 0.7rem;   
+            margin: 0 2rem; 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="bod_Con">
+            <p class="title"> <span>Art Gallery</span> <br> <span> Diana</span>
+            </p>
+
+            <h1>Certificate of Authenticity</h2>
+                <h5>This certificate is to authenticate the original painting by Daina Marchis</h5>
+                <div class="row_Con">
+                  
+                    <div class="details_con">
+                        <h3>
+                            Title of Artwork - {{ title }}
+                        </h3>
+                        <h3>
+                            Year Painted - {{ year }}
+                        </h3>
+                        <h3>
+                            Size - {{ size }}
+                        </h3>
+                
+    
+                    </div>
+                    <div class="img_Con">
+                        <img src={{headerImage}} alt="">
+                    </div>
+
+                </div>
+                <div class="sig_con">
+                    <div class="sig_Top">
+                        <img src='http://localhost:5001/certi/sig.png' alt="">
+                    </div>
+                    <div class="line"></div>
+                    <div class="sig_Bottom">
+                        <h3>Diana Marchis</h3>
+                        <!-- <h3>Date</h3> -->
+                    </div>
+                </div>
+                <div class="footer">
+                    <p>Copyright and reproduction rights are retained by Diana Marchis
+                    </p>
+                    <p>+40 747 747 747 dm@dianam.art
+                    </p>
+                    <h3>
+                        www.dianam.art
+                    </h3>
+
+                </div>
+
+
+        </div>
+
+    </div>
+    </div>
+</body>
+
+</html>

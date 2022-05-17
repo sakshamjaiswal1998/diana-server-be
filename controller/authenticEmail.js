@@ -7,6 +7,9 @@ const path = require('path');
 const User = require("../models/User");
 var fs = require('fs');
 const handlebars = require('handlebars')
+const pdf = require('html-pdf');
+const { type } = require("os");
+const htmlPdf= require('html-pdf-node')
 
 exports.sendEmail = async (req, res) => {
 
@@ -27,14 +30,16 @@ exports.sendEmail = async (req, res) => {
 // size,
         oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
         try {
-            const filePath = path.join(__dirname, '/templates/purchase.html');
+            const filePath = path.join(__dirname, '/templates/send.html');
             const source = fs.readFileSync(filePath, 'utf-8').toString();
             const template = handlebars.compile(source);
             const replacements = {
                 title: req.body.title,
                 year: req.body.year,
-                size: req.body.size
+                size: req.body.size,
+                headerImage:'http://localhost:5001/certi/sample.png'
             };
+           
             const htmlToSend = template(replacements);
             const accessToken = await oAuth2Client.getAccessToken();
             const transport = nodemailer.createTransport({
@@ -48,14 +53,60 @@ exports.sendEmail = async (req, res) => {
                     accessToken: accessToken,
                 },
             });
+         
+const options = {
+  format: 'A4',
+  
+ 
+}
+
+pdf.create(htmlToSend, options).toFile( __dirname +'/templates/certi.pdf', (err, res) => {
+  if (err) {
+    console.log(err);
+  }
+});
 
             const mailOptions = {
                 from: 'dm@dianam.art',
                 to: req.body.email,
-                subject: 'Greeting From Diana Art Gallery',
+                subject: 'The Product has been successfully purchased',
                 // text: 'Something New',
-                html: htmlToSend,
+                html: `<html lang="en">
+                <head>
+                  <meta charset="UTF-8" />
+                  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                  <title>Diana</title>
+                  <style>
+                  
+                  </style>
+                </head>
+              
+                <body>
+                  <p>Thank you for buying painting from Diana Art Gallery!</p>
+              
+                  <p style="margin: top 10px">
+                    You can download the certificate of authenticity from the attachment
+                  </p>
+                  <p>
+                    Name of Art : ${req.body.title}<br />
+                    Year : ${req.body.year} <br /> Size : ${req.body.size}
+                  </p>
+                 
+                </body>
+              </html>`,
                 // template: 'index'
+                attachments: [
+            //         {
+            //         filename: 'sample.jpg',
+            //         path: __dirname +'/templates/sample.jpg',
+            //         cid: 'sample' 
+            //    },
+               {
+                filename: 'test.pdf',
+                path: __dirname +'/templates/certi.pdf',
+                contentType: 'application/pdf'
+               }]
             };
             const result = await transport.sendMail(mailOptions);
             if (result.accepted.length != 0) {
