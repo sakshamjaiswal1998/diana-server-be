@@ -60,7 +60,7 @@ const options = {
  
 }
 
-pdf.create(htmlToSend, options).toFile( __dirname +'/templates/certi.pdf', (err, res) => {
+pdf.create(htmlToSend, options).toFile( __dirname +'/templates/certificate.pdf', (err, res) => {
   if (err) {
     console.log(err);
   }
@@ -104,7 +104,7 @@ pdf.create(htmlToSend, options).toFile( __dirname +'/templates/certi.pdf', (err,
             //    },
                {
                 filename: 'certificate.pdf',
-                path: __dirname +'/templates/certi.pdf',
+                path: __dirname +'/templates/certificate.pdf',
                 contentType: 'application/pdf'
                }]
             };
